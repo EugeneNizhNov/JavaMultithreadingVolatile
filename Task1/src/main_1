@@ -1,0 +1,60 @@
+//Второй вариант написания задачи "Бесполезная коробка"
+
+public class Main {
+
+    volatile static boolean button;
+
+    public static void main(String[] args) throws InterruptedException {
+
+         Thread thread =  new buttonOn();
+         Thread thread1 = new buttonOff();
+         thread1.setName("Поток игрушки");
+         thread.start();
+         thread1.start();
+         thread.join();
+         thread1.interrupt();
+    }
+
+    public static class buttonOn extends Thread {
+        int count;
+        @Override
+        public void run() {
+            try {
+                while (!isInterrupted()) {
+                    while (!button) {
+                        //System.out.println(button);
+                        System.out.println("Игрок включает тумблер");
+                        Thread.sleep(1500);
+                        button = true;
+                        count++;
+                        // System.out.println(button);
+                    }
+                    if (count == 5) {
+                        interrupt();
+                        //Thread.currentThread().interrupt();
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static class buttonOff extends Thread {
+        @Override
+        public void run() {
+            try {
+                while (!isInterrupted()) {
+                    while (button) {
+                        System.out.println("Игрушка из коробки выключает тумблер");
+                        Thread.sleep(2000);
+                        button = false;
+                    }
+                }
+            } catch (InterruptedException e) {
+                System.out.println(getName() + " has been interrupted");
+                // e.printStackTrace();
+            }
+        }
+    }
+}
