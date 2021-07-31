@@ -1,4 +1,6 @@
-/** Задача 1. Самая бесполезная коробка **/
+/**
+ * Задача 1. Самая бесполезная коробка
+ **/
 
 public class Main {
 
@@ -11,7 +13,7 @@ public class Main {
         gamerThread.start();
         toyBoxThread.start();
         gamerThread.join();
-        toyBox.interrupt();
+        toyBoxThread.interrupt();
     }
 }
 

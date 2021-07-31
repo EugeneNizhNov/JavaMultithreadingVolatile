@@ -1,18 +1,20 @@
-/** Задача 2. Отчет для налоговой **/
+/**
+ * Задача 2. Отчет для налоговой
+ **/
+
+import java.util.concurrent.*;
+
 public class Main {
-    public static void main(String[] args) throws  InterruptedException{
+    public static void main(String[] args) throws InterruptedException {
         Store store = new Store();
-        Thread thread = new Thread(null,()->store.total(store.addToArrayProceeds()),"Первый магазин");
-        Thread thread1 = new Thread(null,()->store.total(store.addToArrayProceeds()),"Второй магазин");
-        Thread thread2 = new Thread(null,()->store.total(store.addToArrayProceeds()),"Третий магазин");
-        thread.start();
-        Thread.sleep(100);
-        thread1.start();
-        Thread.sleep(100);
-        thread2.start();
-        thread1.join();
-        thread.join();
-        thread2.join();
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Выручка магазина " + (i + 1));
+            executorService.submit(new Thread(store));
+            Thread.sleep(100);
+        }
+        executorService.awaitTermination(3, TimeUnit.SECONDS);
+        executorService.shutdown();
         System.out.println("Итого сумма выручки с трех магазинов: " + store.getCurrentResult());
     }
 }

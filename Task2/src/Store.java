@@ -1,19 +1,20 @@
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.LongAdder;
 
-public class Store {
-    private AtomicLong amount = new AtomicLong(0);
+public class Store implements Runnable {
+    private final LongAdder amount = new LongAdder();
 
-    public void total(long[] proceeds) {
-        System.out.println("Выручка " + Thread.currentThread().getName());
-        for (long bit : proceeds) {
+    @Override
+    public void run() {
+
+        for (long bit : arrayOfProceeds()) {
             System.out.print(bit + " ");
-            amount.getAndAdd(bit);
+            amount.add(bit);
         }
         System.out.println();
     }
 
-    public long[] addToArrayProceeds() {
+    public long[] arrayOfProceeds() {
         Random random = new Random();
         int bound = 1500;
         long[] proceeds = new long[9];
@@ -24,6 +25,6 @@ public class Store {
     }
 
     public long getCurrentResult() {
-        return amount.get();
+        return amount.sum();
     }
 }
