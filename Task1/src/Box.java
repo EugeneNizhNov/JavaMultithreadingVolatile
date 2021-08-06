@@ -5,7 +5,7 @@ public class Box extends Thread {
 
     public void buttonOn() {
         int count = 0;
-        final int iteration = 5;
+        final int toggleSwitchСount = 5;
 
         try {
             while (!isInterrupted()) {
@@ -15,7 +15,7 @@ public class Box extends Thread {
                     button = true;
                     count++;
                 }
-                if (count == iteration) {
+                if (count == toggleSwitchСount) {
                     return;
                 }
             }

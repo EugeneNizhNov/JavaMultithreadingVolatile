@@ -16,10 +16,11 @@ public class Store implements Runnable {
 
     public long[] arrayOfProceeds() {
         Random random = new Random();
-        int bound = 1500;
-        long[] proceeds = new long[9];
+        int numberOfGoods = 9;
+        int  maxProductPrice  = 1500;
+        long[] proceeds = new long[numberOfGoods];
         for (int i = 0; i < proceeds.length; i++) {
-            proceeds[i] = random.nextInt(bound);
+             proceeds[i] = random.nextInt(maxProductPrice);
         }
         return proceeds;
     }

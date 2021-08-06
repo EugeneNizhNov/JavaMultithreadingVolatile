@@ -7,11 +7,13 @@ import java.util.concurrent.*;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Store store = new Store();
+        int timeOut = 100;
+        int numberOfStores = 3;
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < numberOfStores; i++) {
             System.out.println("Выручка магазина " + (i + 1));
             executorService.submit(new Thread(store));
-            Thread.sleep(100);
+            Thread.sleep(timeOut);
         }
         executorService.awaitTermination(3, TimeUnit.SECONDS);
         executorService.shutdown();
