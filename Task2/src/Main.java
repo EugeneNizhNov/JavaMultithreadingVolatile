@@ -5,10 +5,11 @@
 import java.util.concurrent.*;
 
 public class Main {
+
     public static void main(String[] args) throws InterruptedException {
         Store store = new Store();
-        int timeOut = 100;
-        int numberOfStores = 3;
+        final int timeOut = 100;
+        final int numberOfStores = 3;
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         for (int i = 0; i < numberOfStores; i++) {
             System.out.println("Выручка магазина " + (i + 1));

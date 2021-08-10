@@ -16,8 +16,8 @@ public class Store implements Runnable {
 
     public long[] arrayOfProceeds() {
         Random random = new Random();
-        int numberOfGoods = 9;
-        int  maxProductPrice  = 1500;
+        final int numberOfGoods = 9;
+        final int  maxProductPrice  = 1500;
         long[] proceeds = new long[numberOfGoods];
         for (int i = 0; i < proceeds.length; i++) {
              proceeds[i] = random.nextInt(maxProductPrice);

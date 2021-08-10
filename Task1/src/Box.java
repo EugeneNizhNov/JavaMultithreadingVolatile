@@ -41,7 +41,7 @@ public class Box extends Thread {
 
     public int timeOut() {
         Random random = new Random();
-        final int bound = 2500;
-        return random.nextInt(bound);
+        final int maxPauseAmount = 2500;
+        return random.nextInt(maxPauseAmount);
     }
 }
