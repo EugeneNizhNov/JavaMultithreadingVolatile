@@ -8,6 +8,6 @@ public class Gamer extends Thread {
 
     @Override
     public void run() {
-            box.buttonOn();
+        box.buttonOn();
     }
 }

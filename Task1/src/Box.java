@@ -2,10 +2,11 @@ import java.util.Random;
 
 public class Box extends Thread {
     private volatile static boolean button;
+    private static final int MAX_PAUSE_AMOUNT = 2500;
+    private static final int TOGGLE_SWITCH_COUNT = 5;
 
     public void buttonOn() {
         int count = 0;
-        final int toggleSwitchСount = 5;
 
         try {
             while (!isInterrupted()) {
@@ -15,7 +16,7 @@ public class Box extends Thread {
                     button = true;
                     count++;
                 }
-                if (count == toggleSwitchСount) {
+                if (count == TOGGLE_SWITCH_COUNT) {
                     return;
                 }
             }
@@ -41,7 +42,6 @@ public class Box extends Thread {
 
     public int timeOut() {
         Random random = new Random();
-        final int maxPauseAmount = 2500;
-        return random.nextInt(maxPauseAmount);
+        return random.nextInt(MAX_PAUSE_AMOUNT);
     }
 }

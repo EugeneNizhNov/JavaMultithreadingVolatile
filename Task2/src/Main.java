@@ -5,16 +5,16 @@
 import java.util.concurrent.*;
 
 public class Main {
+    final static int TIMEOUT = 100;
+    final static int NUMBER_OF_STORES = 3;
 
     public static void main(String[] args) throws InterruptedException {
         Store store = new Store();
-        final int timeOut = 100;
-        final int numberOfStores = 3;
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-        for (int i = 0; i < numberOfStores; i++) {
+        for (int i = 0; i < NUMBER_OF_STORES; i++) {
             System.out.println("Выручка магазина " + (i + 1));
             executorService.submit(new Thread(store));
-            Thread.sleep(timeOut);
+            Thread.sleep(TIMEOUT);
         }
         executorService.awaitTermination(3, TimeUnit.SECONDS);
         executorService.shutdown();

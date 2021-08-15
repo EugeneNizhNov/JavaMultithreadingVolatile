@@ -3,6 +3,8 @@ import java.util.concurrent.atomic.LongAdder;
 
 public class Store implements Runnable {
     private final LongAdder amount = new LongAdder();
+    private static final int NUMBER_OF_GOODS = 9;
+    private static final int MAX_PRODUCT_PRICE = 1500;
 
     @Override
     public void run() {
@@ -16,11 +18,10 @@ public class Store implements Runnable {
 
     public long[] arrayOfProceeds() {
         Random random = new Random();
-        final int numberOfGoods = 9;
-        final int  maxProductPrice  = 1500;
-        long[] proceeds = new long[numberOfGoods];
+
+        long[] proceeds = new long[NUMBER_OF_GOODS];
         for (int i = 0; i < proceeds.length; i++) {
-             proceeds[i] = random.nextInt(maxProductPrice);
+            proceeds[i] = random.nextInt(MAX_PRODUCT_PRICE);
         }
         return proceeds;
     }
